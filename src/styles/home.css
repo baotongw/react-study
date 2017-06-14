@@ -1,0 +1,21 @@
+@import url('./modules/reset.css');
+
+.title {
+    padding: 20px;
+    font-size: 42px;
+    color: #e79;
+    text-align: center;
+}
+.box {
+    margin: 10px 32px;
+}
+.articles {
+    margin: 8px;
+    font-size: 14px;
+}
+.articles .item {
+    list-style: none;
+}
+.articles .item a {
+    text-decoration: none;
+}

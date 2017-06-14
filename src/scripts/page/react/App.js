@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import Header from './page/header'
-import List from './page/list'
-import Filter from './page/filter'
-import Status from './page/status'
+import Header from './component/header'
+import List from './component/list'
+import Filter from './component/filter'
+import Status from './component/status'
 
 class App extends Component {
 

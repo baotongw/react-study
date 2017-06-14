@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     // 文件合并
     // concat = require('gulp-concat'),
-    // cssmin = require('gulp-clean-css'),
+    cssmin = require('gulp-clean-css'),
     // htmlmin = require('gulp-htmlmin'),
     // commonjs
     browserify = require("browserify"),
@@ -25,7 +25,7 @@ var gulp = require('gulp'),
     es = require('event-stream');
 
 var entries = [
-    './App.js'
+    'page/react/App.js'
 ]
 
 gulp.task('react-compile', () => {
@@ -33,6 +33,7 @@ gulp.task('react-compile', () => {
     //遍历入口文件
     var tasks = entries.map(function(entry, index) {
         var browser = browserify({
+            basedir: 'src/scripts',
             entries: [entry]
         });
         
@@ -44,18 +45,26 @@ gulp.task('react-compile', () => {
             // .pipe(sourcemaps.init({ loadMaps: true }))
             // .pipe(uglify())
             // .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('./dist'));
+            .pipe(gulp.dest('./public/scripts'));
     });
 
     //创建一个合并流
     return es.merge.apply(null, tasks);
 });
 
+gulp.task('style', () => {
+    return gulp.src('src/styles/*.css')
+        .pipe(sourcemaps.init())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./public/styles'));
+})
+
 // 第二个参数标识在此任务执行之前需要执行的task
 gulp.task('react-dev', ['react-compile'], () => {
     gulp.watch('page/*', ['react-compile']);
 });
 
-gulp.task('default', ['react-dev'], function () {
+gulp.task('default', ['react-dev', 'style'], function () {
     console.log('Gulp task done.')
 });
