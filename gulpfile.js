@@ -25,13 +25,15 @@ var gulp = require('gulp'),
     es = require('event-stream');
 
 var entries = [
-    'page/react/App.js'
+    // 'page/react/app.js',
+    'page/backbone/app.js'
 ]
 
 gulp.task('react-compile', () => {
     
     //遍历入口文件
     var tasks = entries.map(function(entry, index) {
+        console.log('compile file:', entry);
         var browser = browserify({
             basedir: 'src/scripts',
             entries: [entry]
@@ -62,9 +64,13 @@ gulp.task('style', () => {
 
 // 第二个参数标识在此任务执行之前需要执行的task
 gulp.task('react-dev', ['react-compile'], () => {
-    gulp.watch('page/*', ['react-compile']);
+    gulp.watch('src/scripts/page/**', ['react-compile']);
 });
 
-gulp.task('default', ['react-dev', 'style'], function () {
+gulp.task('style-dev', ['style'], () => {
+    gulp.watch('src/styles/**', ['style']);
+})
+
+gulp.task('default', ['react-dev', 'style-dev'], function () {
     console.log('Gulp task done.')
 });

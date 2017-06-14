@@ -6,10 +6,10 @@ router.get('/', (req, res) => {
 
 router.get('/article/react', (req, res) => {
     res.render('pages/react');
-});
+})
 
 router.get('/article/backbone', (req, res) => {
     res.render('pages/backbone');
-});
+})
 
 module.exports = router;
