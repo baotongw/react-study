@@ -26,7 +26,8 @@ var gulp = require('gulp'),
 
 var entries = [
     // 'page/react/app.js',
-    'page/backbone/app.js'
+    // 'page/backbone/app.js'
+    'page/react-flux/app.js'
 ]
 
 gulp.task('react-compile', () => {
@@ -40,13 +41,13 @@ gulp.task('react-compile', () => {
         });
         
         // es6 transform; react transform
-        return browser.transform('babelify', {presets: ['es2015', 'react']})
+        return browser.transform('babelify', {presets: ['es2015', 'react', 'stage-0']})
             .bundle()
             .pipe(source(entry))            
             .pipe(buffer())
-            // .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(sourcemaps.init({ loadMaps: true }))
             // .pipe(uglify())
-            // .pipe(sourcemaps.write('./'))
+            .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest('./public/scripts'));
     });
 

@@ -41,5 +41,6 @@ var EventModel = Backbone.Model.extend({
     }
 })
 
-var eventModel = new EventModel();
-eventModel.set('name', 'xuan.li');
+var eventModel = new EventModel()
+eventModel.set('name', 'xuan.li')
+

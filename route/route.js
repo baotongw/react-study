@@ -8,6 +8,10 @@ router.get('/article/react', (req, res) => {
     res.render('pages/react');
 })
 
+router.get('/article/flux', (req, res) => {
+    res.render('pages/react-flux');
+})
+
 router.get('/article/backbone', (req, res) => {
     res.render('pages/backbone');
 })
