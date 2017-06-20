@@ -5,12 +5,7 @@ import { updateItemAction, removeItemAction, selectItemAction } from '../actions
 class ListItem extends Component {
     onItemCheck(event) {
         let {li} = this.props
-
-        if(this.refs.chk.checked) {
-            li.status = Status.Complete
-        } else {
-            li.status = Status.Active
-        }
+        li.status = this.refs.chk.checked ? Status.Complete : Status.Active
 
         updateItemAction(li)
     }

@@ -21,6 +21,10 @@ const Store = assign({}, EventEmitter.prototype, {
         this.on('change', callback)
     },
 
+    removeChangeHandler: function(callback) {
+        this.removeListener('change', callback)
+    },
+
     emitChange: function() {
         this.emit('change')
     },
@@ -65,10 +69,6 @@ const Store = assign({}, EventEmitter.prototype, {
 
     filterHandler: function(filter) {
         this.filter = filter
-    },
-
-    removeChangeHandler: function(callback) {
-        this.removeListener('change', callback)
     }
 })
 

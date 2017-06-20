@@ -18,7 +18,7 @@ class List extends Component {
             if(checkKey && li.status !== filter) {
                 return ''
             }
-            console.log(li.id);
+
             return <ListItem key={li.id} filter={'list-' + li.id} li={li} />
         })
 
