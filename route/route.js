@@ -16,4 +16,10 @@ router.get('/article/backbone', (req, res) => {
     res.render('pages/backbone');
 })
 
+router.get('/demo/react/:name', (req, res) => {
+    let demoName = req.params.name;
+
+    res.render(`pages/demos/react/${demoName}`)
+})
+
 module.exports = router;
