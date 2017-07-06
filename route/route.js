@@ -4,6 +4,10 @@ router.get('/', (req, res) => {
     res.render('home');
 })
 
+router.get('/react', (req, res) => {
+    res.render('pages/react-study')
+})
+
 router.get('/article/react', (req, res) => {
     res.render('pages/react');
 })

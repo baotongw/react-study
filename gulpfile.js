@@ -25,9 +25,10 @@ var gulp = require('gulp'),
     es = require('event-stream');
 
 var entries = [
-    'page/react/app.js',
+    // 'page/react/app.js',
     // 'page/backbone/app.js'
-    'page/react-flux/app.js'
+    // 'page/react-flux/app.js'
+    'page/react-study/app.js'
 ]
 
 gulp.task('react-compile', () => {
