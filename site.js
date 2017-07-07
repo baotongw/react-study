@@ -10,7 +10,7 @@ site.set('view engine', engineName)
 site.use(express.static(__dirname + '/public'))
 site.use('/', route)
 
-const port = '9001'
+const port = '9000'
 site.listen(port)
 
 console.log(`Site running at http://localhost:${port}`)

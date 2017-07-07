@@ -27,7 +27,8 @@ var gulp = require('gulp'),
 var entries = [
     // 'page/react/app.js',
     // 'page/backbone/app.js'
-    'page/react-flux/app.js'
+    // 'page/react-flux/app.js'
+    'page/react-study/app.js'
 ]
 
 gulp.task('react-compile', () => {
@@ -39,6 +40,7 @@ gulp.task('react-compile', () => {
             basedir: 'src/scripts',
             entries: [entry]
         });
+        console.log('files are compiled')
         
         // es6 transform; react transform
         return browser.transform('babelify', {presets: ['es2015', 'react', 'stage-0']})
@@ -72,6 +74,6 @@ gulp.task('style-dev', ['style'], () => {
     gulp.watch('src/styles/**', ['style']);
 })
 
-gulp.task('default', ['react-dev', 'style-dev'], function () {
+gulp.task('default', ['react-dev'], function () {
     console.log('Gulp task done.')
 });
