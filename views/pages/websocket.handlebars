@@ -1,0 +1,37 @@
+{{#block 'body'}}
+    <script>
+        var server = 'ws://www.websocket.com';
+        //var server = 'ws://127.0.0.1:8080';
+        var socket = new WebSocket(server);
+        var log = console.log;
+        var max = 20;
+
+        socket.onopen = function(event) {
+            log('Connected');
+
+            for(var i = 0; i < max; i++) {
+                (function(index) {
+                    setTimeout(function() {
+                        socket.send(index);
+                    }, index * 100);
+                })(i)
+            }
+        }
+
+        socket.onmessage = function(event) {
+            log('[Received] ' + event.data);
+        }
+
+        socket.onclose = function() {
+            log('Client send close')
+        }
+
+        var sendt = window.send = function(msg) {
+            socket.send(msg);
+        }
+
+        window.addEventListener('onbeforeunload', () => {
+            socket.close();
+        })
+    </script>
+{{/block}}

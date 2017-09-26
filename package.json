@@ -52,6 +52,7 @@
     "connect": "^3.6.2",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.2",
+    "css-checkbox-library": "^1.4.0",
     "csurf": "^1.9.0",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
