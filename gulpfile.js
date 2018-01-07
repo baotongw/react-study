@@ -59,9 +59,9 @@ gulp.task('react-compile', () => {
 
 gulp.task('style', () => {
     return gulp.src('src/styles/*.css')
-        .pipe(sourcemaps.init())
-        .pipe(cssmin())
-        .pipe(sourcemaps.write())
+        // .pipe(sourcemaps.init())
+        // .pipe(cssmin())
+        // .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public/styles'));
 })
 
