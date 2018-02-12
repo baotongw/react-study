@@ -1,0 +1,33 @@
+@import url('./modules/reset.css');
+.default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin: 20px;
+    text-align: center;
+    border: 1px solid lightgray;
+}
+.box1 {
+    background: linear-gradient(90deg, #ff9800 var(--stop, 0%), #3c3c3c 0);
+    /* background: linear-gradient(135deg, orange var(--stop, 0%), orange 20%, cyan); */
+}
+.box2 {
+    background: linear-gradient(90deg, #ff9800 var(--stop, 0%), #3c3c3c 0);
+    background-size: 5em;
+}
+.box3 {
+    --c0: #ff9800;
+    --c1: #3c3c3c;
+    background: linear-gradient(90deg, 
+        var(--gc0, var(--c0)) var(--stop, 0%), 
+        var(--gc1, var(--c1)) 0)
+}
+.box4 {
+    background: linear-gradient(var(--angle, 0deg), #ff9800 50%, #3c3c3c 0);
+}
+
+.tit {
+    color: white;
+    font-size: 32px;
+}

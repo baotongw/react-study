@@ -25,10 +25,10 @@ var gulp = require('gulp'),
     es = require('event-stream');
 
 var entries = [
-    // 'page/react/app.js',
-    // 'page/backbone/app.js'
-    // 'page/react-flux/app.js'
-    'page/react-study/app.js'
+    'page/react/app.js',
+    'page/backbone/app.js',
+    'page/react-flux/app.js',
+    'page/react-study/app.js',
 ]
 
 gulp.task('react-compile', () => {
@@ -74,6 +74,6 @@ gulp.task('style-dev', ['style'], () => {
     gulp.watch('src/styles/**', ['style']);
 })
 
-gulp.task('default', ['react-dev'], function () {
+gulp.task('default', ['react-dev', 'style-dev'], function () {
     console.log('Gulp task done.')
 });
