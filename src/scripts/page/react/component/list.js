@@ -13,12 +13,8 @@ class List extends Component {
     updateItem(item) {
         let {list= [], updateState} = this.props
 
-        list.forEach(li => {
-            if(li.id === item.id) {
-                li = item
-            }
-        })
-
+        list = list.filter(li => li.id === item.id)
+        
         updateState({
             list
         })

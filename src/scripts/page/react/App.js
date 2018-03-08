@@ -22,7 +22,7 @@ class App extends Component {
     }
 
     updateState(newState) {
-        let state = Object.assign({}, this.state, newState)
+        let state = {...this.state, ...newState}
         console.log(state)
         this.setState(state)
     }

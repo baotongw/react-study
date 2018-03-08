@@ -1,0 +1,68 @@
+{{#block 'head'}}
+<link rel="stylesheet" href="/styles/linear.css" type="text/css">
+{{/block}}
+
+{{#block 'body'}}
+<h1>CSS-Linear</h1>
+
+<div id="box" class="default box4">
+    <p class="tit">Linear-Gradient</p>
+</div>
+
+
+<script>
+    const box = document.getElementById('box');
+    const NF = 30; // number of frames transition happens over
+    // 保留最后一次的requestFrameId
+    let rID = null;
+    // 记录执行次数
+    let count = 0;
+    // 方向
+    let direction = -1;
+
+    function stopAni() {
+        cancelAnimationFrame(rID);
+        rID = null;  
+    };
+
+    function update_obsolete() {
+        count += direction; // update current frame index
+    
+        let k = count/NF; // compute progress
+        
+        document.body.style.setProperty('--stop', `${+(k*100).toFixed(2)}%`);
+        
+        // 不断请求requestAnimationFrame，直到f
+        if(!(count%NF)) {
+            stopAni();
+            return
+        }
+        
+        rID = requestAnimationFrame(update)
+    };
+
+    function update() {
+        count += direction;
+            
+        let k = count/NF;
+        
+        document.body.style.setProperty(
+            '--angle', 
+            `${+(k*180).toFixed(2)}deg`
+        );
+        
+        if(!(count%NF)) {
+            stopAni();
+            return
+        }
+        
+        rID = requestAnimationFrame(update)
+    };
+
+    box.addEventListener('click', e => {
+        if(rID) stopAni(); // if an animation is already running, stop it
+        direction *= -1; // change animation direction
+        update();
+    }, false);
+</script>
+{{/block}}
