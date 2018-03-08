@@ -3,6 +3,13 @@ import Status from './status'
 import ListItem from './listItem'
 
 class List extends Component {
+    constructor(props) {
+        super(props);
+
+        this.updateItem = this.updateItem.bind(this)
+        this.selectItem = this.selectItem.bind(this)
+    }
+
     updateItem(item) {
         let {list= [], updateState} = this.props
 
@@ -31,7 +38,13 @@ class List extends Component {
                 return ''
             }
             console.log(li.id);
-            return <ListItem key={li.id} filter={'list-' + li.id} li={li} selectItem={this.selectItem.bind(this)} updateItem={this.updateItem.bind(this)} />
+            return (
+                <ListItem 
+                    key={li.id} 
+                    filter={'list-' + li.id} li={li} 
+                    selectItem={this.selectItem} 
+                    updateItem={this.updateItem} />
+            )
         })
 
         return <div className="list">

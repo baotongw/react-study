@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import Status from './status'
 
 class ListItem extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onItemCheck = this.onItemCheck.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.changeItem = this.changeItem.bind(this);
+    }
+
     onItemCheck(event) {
         let {li, updateItem} = this.props
 
@@ -48,11 +56,12 @@ class ListItem extends Component {
 
         return <li className={cls}>
             <span className="chk">
-                <input type="checkbox" ref="chk" name="status" checked={attr} onChange={this.onItemCheck.bind(this)} />
+                <input type="checkbox" ref="chk" name="status" 
+                    checked={attr} onChange={this.onItemCheck} />
             </span>
-            <span className="val" onClick={this.changeItem.bind(this, li.val)}>{li.val}</span>
+            <span className="val" onClick={() => this.changeItem(li.val)}>{li.val}</span>
             <span className="oper">
-                <a href="javascript:" className="del" onClick={this.deleteItem.bind(this)} >Delete</a>
+                <a href="javascript:;" className="del" onClick={this.deleteItem} >Delete</a>
             </span>
         </li>
     }
