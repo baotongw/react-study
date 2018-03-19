@@ -1,47 +1,31 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
 router.get('/', (req, res) => {
-    res.render('home');
+    res.render('home')
 })
 
-router.get('/react', (req, res) => {
-    res.render('pages/react-study')
+// react 学习、功能测试页
+router.get('/react/:page', (req, res) => {
+    let pageName = req.param.page
+    res.render(`pages/react/${pageName}`)
 })
 
-router.get('/article/react', (req, res) => {
-    res.render('pages/react');
+// 不同tech实现的todolist
+router.get('/todolist/:tech', (req, res) => {
+    let tech = req.param.tech
+    res.render(`pages/todolist/${tech}`)
 })
 
-router.get('/article/flux', (req, res) => {
-    res.render('pages/react-flux');
+// css功能feature学习页
+router.get('/css/:page', (req, res) => {
+    let pageName = req.params.page
+    res.render(`pages/css/${pageName}`)
 })
 
-router.get('/article/backbone', (req, res) => {
-    res.render('pages/backbone');
+// 其他功能 - websocket demo
+router.get('/other/:page', (req, res) => {
+    let pageName = req.param.page
+    res.render(`pages/other/${pageName}`)
 })
 
-router.get('/article/rtest', (req, res) => {
-    res.render('pages/rtest');
-})
-
-router.get('/demo/react/:name', (req, res) => {
-    let demoName = req.params.name;
-
-    res.render(`pages/demos/react/${demoName}`)
-})
-
-router.get('/css/:name', (req, res) => {
-    let pageName = req.params.name;
-    res.render(`pages/css/${pageName}`);
-})
-
-router.get('/ws', (req, res) => {
-    res.render(`pages/websocket`)
-})
-
-router.get('/css/:name', (req, res) => {
-    let pageName = req.params.name;
-    res.render(`pages/css/${pageName}`);
-})
-
-module.exports = router;
+module.exports = router
