@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Header from './component/header'
 import List from './component/list'
@@ -7,41 +7,65 @@ import Status from './component/status'
 
 class App extends Component {
 
-    constructor() {
-        super()
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            updateId: -1,
-            updateVal: '',
-            count: 0,
-            filter: Status.All,
-            list: []
-        }
-
-        this.updateState = this.updateState.bind(this);
+    this.state = {
+      updateId: -1,
+      updateVal: '',
+      count: 0,
+      filter: Status.All,
+      list: [],
     }
 
-    updateState(newState) {
-        let state = {...this.state, ...newState}
-        console.log(state)
-        this.setState(state)
+    this.updateState = this.updateState.bind(this)
+    this.appendOrUpdateItem = this.appendOrUpdateItem.bind(this)
+  }
+
+  updateState(newState) {
+    let state = { ...this.state, ...newState }
+    this.setState(state)
+  }
+
+  appendOrUpdateItem(args) {
+    const { isUpdate, editItem, index } = args
+    let newList
+
+    if(isUpdate) {
+      newList = this.state.list.splice(index, 1, editItem)
+    } else {
+      newList = this.state.list.concat([editItem])
     }
 
-    render() {
-        return <div>
-            <header className="p-hd">
-                TODO MVC - React
-            </header>
-            <section className="content">
-                <div className="box">
-                    <Header states={this.state} updateState={this.updateState} />
-                    <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
-                    <Filter filter={this.state.key} updateState={this.updateState} />
-                </div>
-            </section>
-            <footer className="p-ft">Copyright Baotong.wang 2017.</footer>
+    this.setState({
+      count: newList.length,
+      list: newList,
+      updateId: -1,
+      updateVal: '',
+    })
+  }
+
+  componentDidMount() {
+    console.log('App did Mount.')
+  }
+
+  componentDidUpdate() {
+    console.log('App did update.')
+  }
+
+  render() {
+    return <div>
+      <header className="p-hd">TODO List - React</header>
+      <section className="content">
+        <div className="box">
+          <Header current={this.state} appendOrUpdateItem={this.appendOrUpdateItem} />
+          <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
+          <Filter filter={this.state.filter} updateState={this.updateState} />
         </div>
-    }
+      </section>
+      <footer className="p-ft">Copyright Baotong.Wang 2018.</footer>
+    </div>
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('container'))

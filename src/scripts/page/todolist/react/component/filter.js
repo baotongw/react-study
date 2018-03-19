@@ -2,42 +2,56 @@ import React, { Component } from 'react'
 import Status from './status'
 
 class Filter extends Component {
-    constructor() {
-        super()
+  constructor() {
+    super()
 
-        this.state = {
-            activeIndex: 0
-        }
+    this.currentFilter = null
+
+    this.onItemClick = this.onItemClick.bind(this)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.filter !== nextProps.filter
+  }
+
+  componentDidUpdate() {
+    console.log('filter did update.')
+  }
+
+  componentDidMount() {
+    console.log('filter did Mount.')
+    this.currentFilter = this.props.filter
+  }
+
+  onItemClick(newFilter) {
+    let { filter, updateState } = this.props
+
+    if (newFilter === filter) {
+      return
     }
-    onItemClick(btn, index) {
-        let {filter, updateState} = this.props
 
-        if(btn === filter) {
-            return
-        }
+    this.currentFilter = newFilter
 
-        this.state.activeIndex = index
+    updateState({
+      filter: newFilter
+    })
+  }
+  render() {
+    let { filter } = this.props
+    let btns = []
 
-        updateState({
-            filter: btn
-        })
+    for (var option in Status) {
+      btns.push(Status[option])
     }
-    render() {
-        let {activeIndex} = this.state
-        let btns = []
 
-        for(var filter in Status) {
-            btns.push(Status[filter])
-        }
+    let doms = btns.map((btn, i) => {
+      let cls = 'key' + (filter === btn ? ' active' : '')
 
-        let doms = btns.map((btn, i) => {
-            let cls = 'key' + (activeIndex === i ? ' active' : '')
+      return <a key={i} filter={'filter-' + i} href="javascript:" onClick={() => this.onItemClick(btn)} className={cls}>{btn}</a>
+    })
 
-            return <a key={i} filter={'filter-' + i} href="javascript:" onClick={this.onItemClick.bind(this, btn, i)} className={cls}>{btn}</a>
-        })
-
-        return <div className="querys">{doms}</div>
-    }
+    return <div className="querys">{doms}</div>
+  }
 }
 
 export default Filter
