@@ -17,6 +17,8 @@ class App extends Component {
             filter: Status.All,
             list: []
         }
+
+        this.updateState = this.updateState.bind(this);
     }
 
     updateState(newState) {
@@ -32,9 +34,9 @@ class App extends Component {
             </header>
             <section className="content">
                 <div className="box">
-                    <Header states={this.state} updateState={this.updateState.bind(this)} />
-                    <List list={this.state.list} filter={this.state.filter} updateState={this.updateState.bind(this)} />
-                    <Filter filter={this.state.key} updateState={this.updateState.bind(this)} />
+                    <Header states={this.state} updateState={this.updateState} />
+                    <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
+                    <Filter filter={this.state.key} updateState={this.updateState} />
                 </div>
             </section>
             <footer className="p-ft">Copyright Baotong.wang 2017.</footer>
