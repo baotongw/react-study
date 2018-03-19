@@ -6,13 +6,14 @@ router.get('/', (req, res) => {
 
 // react 学习、功能测试页
 router.get('/react/:page', (req, res) => {
-    let pageName = req.param.page
+    let pageName = req.params.page
     res.render(`pages/react/${pageName}`)
 })
 
 // 不同tech实现的todolist
 router.get('/todolist/:tech', (req, res) => {
-    let tech = req.param.tech
+    let tech = req.params.tech
+
     res.render(`pages/todolist/${tech}`)
 })
 
@@ -24,7 +25,7 @@ router.get('/css/:page', (req, res) => {
 
 // 其他功能 - websocket demo
 router.get('/other/:page', (req, res) => {
-    let pageName = req.param.page
+    let pageName = req.params.page
     res.render(`pages/other/${pageName}`)
 })
 

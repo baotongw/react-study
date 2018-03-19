@@ -3,9 +3,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     // 文件合并
     // concat = require('gulp-concat'),
+    // 处理css import
+    importCss = require('gulp-import-css'),
     cssmin = require('gulp-clean-css'),
     // htmlmin = require('gulp-htmlmin'),
-    // commonjs
     browserify = require("browserify"),
     // 生成source map
     sourcemaps = require("gulp-sourcemaps"),
@@ -19,28 +20,27 @@ var gulp = require('gulp'),
     // html 版本号
     // revCollector = require('gulp-rev-collector'),
     // 重命名文件
-    rename = require('gulp-rename'),
-    
+    rename = require('gulp-rename'),    
     babelify = require('babelify'),
     es = require('event-stream');
 
-var entries = [
-    'page/react/app.js',
-    'page/backbone/app.js',
-    'page/react-flux/app.js',
+var js_entries = [
+    'page/todolist/backbone/app.js',
+    'page/todolist/react/app.js',
+    'page/todolist/flux/app.js',
+    'page/todolist/redux/app.js', 
+    // 'page/todolist/react-redux/app.js',
     'page/react-study/app.js',
 ]
 
-gulp.task('react-compile', () => {
-    
+gulp.task('script', () => {
     //遍历入口文件
-    var tasks = entries.map(function(entry, index) {
+    var tasks = js_entries.map(function(entry, index) {
         console.log('compile file:', entry);
         var browser = browserify({
             basedir: 'src/scripts',
             entries: [entry]
         });
-        console.log('files are compiled')
         
         // es6 transform; react transform
         return browser.transform('babelify', {presets: ['es2015', 'react', 'stage-0']})
@@ -57,23 +57,27 @@ gulp.task('react-compile', () => {
     return es.merge.apply(null, tasks);
 });
 
+var css_entries = [
+    'src/styles/todolist/*.css',
+    'src/styles/css/*.css',
+    'src/styles/*.css',
+]
+
 gulp.task('style', () => {
-    return gulp.src('src/styles/*.css')
+    return gulp.src(css_entries)
+        .pipe(importCss())
         // .pipe(sourcemaps.init())
         // .pipe(cssmin())
         // .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public/styles'));
 })
 
+gulp.task('build', ['script', 'style'], () => console.log('Build script and style done.'));
+
 // 第二个参数标识在此任务执行之前需要执行的task
-gulp.task('react-dev', ['react-compile'], () => {
-    gulp.watch('src/scripts/page/**', ['react-compile']);
-});
+gulp.task('react-dev', ['script'], () => gulp.watch('src/scripts/page/**', ['script']));
 
-gulp.task('style-dev', ['style'], () => {
-    gulp.watch('src/styles/**', ['style']);
-})
+gulp.task('style-dev', ['style'], () => gulp.watch('src/styles/**', ['style']));
 
-gulp.task('default', ['react-dev', 'style-dev'], function () {
-    console.log('Gulp task done.')
-});
+// 编译代码，同时监听文件变动，然后重写编译
+gulp.task('default', ['react-dev', 'style-dev'], () => console.log('Gulp task done.'));
