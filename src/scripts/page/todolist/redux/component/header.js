@@ -1,53 +1,69 @@
 import React, { Component } from 'react'
 import Status from './status.js'
-
-import { addItemAction, updateItemAction } from '../actions/actions'
+import { dispatch } from '../reducer/index'
+import { addItem, editItem as updateItem } from '../action/index'
 
 class Header extends Component {
-    componentWillReceiveProps(nextProps) {
-        let {states} = nextProps
-        let {updateId, updateVal} = states
+  constructor(props) {
+    super(props)
+    this.editDone = this.editDone.bind(this)
+  }
 
-        if(updateId > 0 && updateVal) {
-            this.refs.ipt.value = updateVal
-            this.refs.ipt.focus();
-        }
+  shouldComponentUpdate(nextProps, nextState) {
+    const { editItem } = nextProps
+    const { editId, editVal } = editItem
+    
+    return editId !== nextProps.editItem.editId || editVal !== nextProps.editItem.editVal
+  }
+
+  componentDidUpdate() {
+    console.log('header did update.')
+    // 刚进入页面不会有editItem，所以放到DidUpdate没问题
+    const { editItem } = nextProps
+    const { editId, editVal } = editItem
+
+    if (editId > 0 && editVal) {
+      this.ipt.value = editVal
+      this.ipt.focus()
+    }
+  }
+
+  componentDidMount() {
+    console.log('header did Mount.')
+  }
+
+  editDone(event) {
+    if (event.keyCode !== 13) {
+      return
     }
 
-    appendList(event) {
-        if(event.keyCode !== 13) {
-            return
-        }
+    const { editId } = this.props.editItem
+    const isUpdate = editId >  0
+    const newVal = this.ipt.value
 
-        let {states} = this.props
-        let {list, updateId} = states
-        let isUpdate = updateId > 0
-        let text = this.refs.ipt.value
-
-        if(!text) {
-            return
-        }
-
-        if(isUpdate) {
-            let item = {
-                id: updateId,
-                status: Status.Active,
-                val: text
-            }
-            
-            updateItemAction(item)
-        } else {
-            addItemAction(text)
-        }
-
-        this.refs.ipt.value = ''
+    if(isUpdate) {
+      dispatch(updateItem({
+        id: editId, 
+        val: newVal
+      }))
+    } else {
+      dispatch(addItem(newVal))
     }
 
-    render() {
-        return <div className="header">
-            <input ref="ipt" type="text" className="ipt" onKeyUp={this.appendList.bind(this)} />
-        </div>
-    }
+    this.ipt.value = ''
+  }
+
+  render() {
+    // 对于这种不需要及时抛出input动态值的case（动态的比如搜索框）
+    // 不需要onChange去更新input值，在最终使用的时候通过原生拿即可
+    return (
+      <div className="header">
+        <input type="text" className="ipt" 
+          ref ={ipt => this.ipt = ipt}
+          onKeyUp={this.editDone} />
+      </div>
+    )
+  }
 }
 
 export default Header

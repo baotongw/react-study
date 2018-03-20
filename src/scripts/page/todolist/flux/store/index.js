@@ -6,8 +6,8 @@ class Store extends EventEmitter {
     super()
 
     this.state = {
-      updateId: -1,
-      updateVal: null,
+      editId: -1,
+      editVal: null,
       list: [],
       filter: Status.All,
     }    
@@ -52,12 +52,12 @@ class Store extends EventEmitter {
 
     if(index > -1) {
       list.splice(index, 1, item)
-      this.state.updateId = -1
-      this.state.updateVal = null
+      this.state.editId = -1
+      this.state.editVal = null
     }
   }
 
-  removeHandler(id, text) {
+  deleteHandler(id, text) {
     const { list } = this.state
     let index = -1
 
@@ -75,8 +75,8 @@ class Store extends EventEmitter {
   }
 
   selectHandler(item) {
-    this.state.updateId = item.updateId
-    this.state.updateVal = item.updateVal
+    this.state.editId = item.editId
+    this.state.editVal = item.editVal
   }
 
   filterHandler (filter) {
@@ -87,15 +87,15 @@ class Store extends EventEmitter {
 export default new Store()
 
 // const Store = Object.assign({}, EventEmitter.prototype, {
-//   updateId: -1,
-//   updateVal: null,
+//   editId: -1,
+//   editVal: null,
 //   list: [],
 //   filter: Status.All,
 
 //   getAll: function () {
 //     return {
-//       updateId: this.updateId,
-//       updateVal: this.updateVal,
+//       editId: this.editId,
+//       editVal: this.editVal,
 //       list: this.list,
 //       filter: this.filter
 //     }
@@ -130,13 +130,13 @@ export default new Store()
 //       if (v.id === item.id) {
 //         v.val = item.val
 
-//         this.updateId = -1
-//         this.updateVal = null
+//         this.editId = -1
+//         this.editVal = null
 //       }
 //     })
 //   },
 
-//   removeHandler: function (id, text) {
+//   deleteHandler: function (id, text) {
 //     let flagIndex = null
 
 //     this.list.forEach((v, i) => {
@@ -147,8 +147,8 @@ export default new Store()
 //   },
 
 //   selectHandler: function (item) {
-//     this.updateId = item.updateId
-//     this.updateVal = item.updateVal
+//     this.editId = item.editId
+//     this.editVal = item.editVal
 //   },
 
 //   filterHandler: function (filter) {

@@ -1,47 +1,52 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Header from './component/header'
 import List from './component/list'
 import Filter from './component/filter'
 import Status from './component/status'
-import assign from 'object-assign'
-import Store from './store/store'
+import store from './reducer/index'
 
 class App extends Component {
 
-    constructor() {
-        super()
+  constructor(props) {
+    super(props)
 
-        this.state = Store.getAll()
-    }
+    this.state = store.getState()
+  }
 
-    componentDidMount() {
-        Store.addChangeHandler(this._onChange.bind(this))
-    }
+  componentDidMount() {
+    console.log('App did Mount.')
 
-    componentWillUnmount() {
-        Store.removeChangeHandler(this._onChange.bind(this))
-    }
+    // 订阅store change，得到unsubscribe方法
+    this.unsubscribeToken = store.subscribe(() => {
+      this.setState(store.getState())
+    })
+  }
 
-    _onChange() {
-        this.setState(Store.getAll())
-    }
+  componentWillUnmount() {
+    console.log('App did update.')
 
-    render() {
-        return <div>
-            <header className="p-hd">
-                TODO MVC - React-Flux
-            </header>
-            <section className="content">
-                <div className="box">
-                    <Header states={this.state} />
-                    <List list={this.state.list} filter={this.state.filter} />
-                    <Filter filter={this.state.filter} />
-                </div>
-            </section>
-            <footer className="p-ft">Copyright Baotong.wang 2017.</footer>
-        </div>
-    }
+    // 解除订阅
+    this.unsubscribeToken && this.unsubscribeToken()
+  }
+
+  render() {
+    const { header, list, filter } = this.state;
+
+    return (
+      <div>
+        <header className="p-hd">TODO List - React</header>
+        <section className="content">
+          <div className="box">
+            <Header editItem={header} />
+            <List list={list} filter={filter} />
+            <Filter filter={filter} />
+          </div>
+        </section>
+        <footer className="p-ft">Copyright Baotong.Wang 2018.</footer>
+      </div>
+    )
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('container'))

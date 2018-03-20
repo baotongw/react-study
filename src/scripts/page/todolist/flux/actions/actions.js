@@ -1,7 +1,7 @@
 import dispatcher from '../dispatcher/index'
 import {
   ADD_ITEM, 
-  REMOVE_ITEM, 
+  DELETE_ITEM, 
   UPDATE_ITEM, 
   SELECT_ITEM, 
   SET_FILTER 
@@ -17,9 +17,9 @@ const addItemAction = text => {
   })
 }
 
-const removeItemAction = id => {
+const deleteItemAction = id => {
   dispatcher.dispatch({
-    actionType: REMOVE_ITEM,
+    actionType: DELETE_ITEM,
     id
   })
 }
@@ -47,7 +47,7 @@ const setFilterAction = filter => {
 
 export default {
   addItem: addItemAction,
-  removeItem: removeItemAction,
+  deleteItem: deleteItemAction,
   updateItem: updateItemAction,
   selectItem: selectItemAction,
   setFilter: setFilterAction,

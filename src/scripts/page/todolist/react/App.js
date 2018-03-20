@@ -11,8 +11,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      updateId: -1,
-      updateVal: '',
+      editId: -1,
+      editVal: '',
       count: 0,
       filter: Status.All,
       list: [],
@@ -40,8 +40,8 @@ class App extends Component {
     this.setState({
       count: newList.length,
       list: newList,
-      updateId: -1,
-      updateVal: '',
+      editId: -1,
+      editVal: '',
     })
   }
 
@@ -58,7 +58,7 @@ class App extends Component {
       <header className="p-hd">TODO List - React</header>
       <section className="content">
         <div className="box">
-          <Header current={this.state} appendOrUpdateItem={this.appendOrUpdateItem} />
+          <Header editItem={this.state} appendOrUpdateItem={this.appendOrUpdateItem} />
           <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
           <Filter filter={this.state.filter} updateState={this.updateState} />
         </div>

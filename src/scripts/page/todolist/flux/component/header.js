@@ -8,9 +8,9 @@ class Header extends Component {
   constructor(props) {
     super(props)
 
-    const { updateId, updateVal } = Store.getState()
+    const { editId, editVal } = Store.getState()
 
-    this.state = { updateId, updateVal }
+    this.state = { editId, editVal }
 
     this.editDone = this.editDone.bind(this)
   }
@@ -24,30 +24,30 @@ class Header extends Component {
   }
 
   componentDidUpdate() {
-    let { updateId, updateVal } = this.state
+    let { editId, editVal } = this.state
 
-    if (updateId > 0 && updateVal) {
-      this.ipt.value = updateVal
+    if (editId > 0 && editVal) {
+      this.ipt.value = editVal
       this.ipt.focus()
     }
   }
 
   onChange = () => {
-    const { updateId, updateVal } = Store.getState()
+    const { editId, editVal } = Store.getState()
 
     // 有了这个就不怎么需要shouldComponentUpdate了
-    if(this.state.updateId !== updateId || this.state.updateVal !== updateVal) {
+    if(this.state.editId !== editId || this.state.editVal !== editVal) {
       this.setState({
-        updateId,
-        updateVal,
+        editId,
+        editVal,
       })
     }
   }
 
   // shouldComponentUpdate(nextProps, nextState) {
-  //   const { updateId, updateVal } = this.state
+  //   const { editId, editVal } = this.state
     
-  //   return updateId !== nextState.states.updateId || updateVal !== nextProps.states.updateVal
+  //   return editId !== nextState.states.editId || editVal !== nextProps.states.editVal
   // }
 
   editDone(event) {
@@ -55,8 +55,8 @@ class Header extends Component {
       return
     }
 
-    let { list, updateId } = this.state
-    let isUpdate = updateId > 0
+    let { list, editId } = this.state
+    let isUpdate = editId > 0
     let text = this.ipt.value
 
     if (!text) {
@@ -65,7 +65,7 @@ class Header extends Component {
 
     if (isUpdate) {
       let item = {
-        id: updateId,
+        id: editId,
         status: Status.Active,
         val: text
       }

@@ -43,7 +43,7 @@ class App extends Component {
     return (
       <div>
         <header className="p-hd">
-          TODO MVC - React-Flux
+          TODO List - React + Flux
         </header>
         <section className="content">
           <div className="box">

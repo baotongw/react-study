@@ -25,12 +25,12 @@ var gulp = require('gulp'),
     es = require('event-stream');
 
 var js_entries = [
-    'page/todolist/backbone/app.js',
-    'page/todolist/react/app.js',
-    'page/todolist/flux/app.js',
+    // 'page/todolist/backbone/app.js',
+    // 'page/todolist/react/app.js',
+    // 'page/todolist/flux/app.js',
     'page/todolist/redux/app.js', 
     // 'page/todolist/react-redux/app.js',
-    'page/react-study/app.js',
+    // 'page/react-study/app.js',
 ]
 
 gulp.task('script', () => {

@@ -2,30 +2,33 @@ import React, { Component } from 'react'
 import Status from './status'
 import ListItem from './listItem'
 
-import { updateItemAction } from '../actions/actions'
-
 class List extends Component {
-    updateItem(item) {
-        updateItemAction(item.id, item.val)
-    }
+  
+  componentDidUpdate() {
+    console.log('list did update.')
+  }
 
-    render() {
-        let {list = [], filter} = this.props
-        let checkKey = filter !== Status.All
+  componentDidMount() {
+    console.log('list did Mount.')
+  }
 
-        let doms = list.map(li => {
-            // only show the filter matched item
-            if(checkKey && li.status !== filter) {
-                return ''
-            }
+  render() {
+    let { list = [], filter } = this.props
+    let checkKey = filter !== Status.All
 
-            return <ListItem key={li.id} filter={'list-' + li.id} li={li} />
-        })
+    let doms = list.map(li => {
+      // only show the filter matched item
+      if (checkKey && li.status !== filter) {
+        return ''
+      }
 
-        return <div className="list">
-            <ul className="i-list">{doms}</ul>
-        </div>
-    }
+      return <ListItem key={li.id} filter={'list-' + li.id} li={li} />
+    })
+
+    return <div className="list">
+      <ul className="i-list">{doms}</ul>
+    </div>
+  }
 }
 
 export default List

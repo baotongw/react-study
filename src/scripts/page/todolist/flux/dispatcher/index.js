@@ -12,7 +12,7 @@
 import { Dispatcher } from 'flux'
 import Store from '../store/index'
 
-import { ADD_ITEM, REMOVE_ITEM, UPDATE_ITEM, SELECT_ITEM, SET_FILTER } from '../const/const'
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, SELECT_ITEM, SET_FILTER } from '../const/const'
 
 const appDispatcher = new Dispatcher()
 
@@ -23,8 +23,8 @@ appDispatcher.register(action => {
     case ADD_ITEM:
       Store.addHandler(action.text)
       break
-    case REMOVE_ITEM:
-      Store.removeHandler(action.id)
+    case DELETE_ITEM:
+      Store.deleteHandler(action.id)
       break
     case UPDATE_ITEM:
       Store.updateHandler(action.item)

@@ -1,37 +1,55 @@
 import React, { Component } from 'react'
-import Status from './status'
-import { setFilterAction } from '../actions/actions'
+import { Status } from '../const'
+import { dispatch } from '../reducer/index'
+import { setFilter } from '../action/index'
 
 class Filter extends Component {
-    constructor() {
-        super()
+  constructor() {
+    super()
+
+    this.onItemClick = this.onItemClick.bind(this)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.filter !== nextProps.filter
+  }
+
+  componentDidUpdate() {
+    console.log('filter did update.')
+  }
+
+  componentDidMount() {
+    console.log('filter did Mount.')
+    // this.currentFilter = this.props.filter
+  }
+
+  onItemClick(newFilter) {
+    dispatch(setFilter(newFilter))
+  }
+
+  render() {
+    let { filter } = this.props
+    let btns = []
+
+    for (var option in Status) {
+      btns.push(Status[option])
     }
-    
-    onItemClick(btn, index) {
-        let {filter, updateState} = this.props
 
-        if(btn === filter) {
-            return
-        }
+    let doms = btns.map((btn, i) => {
+      let cls = 'key' + (filter === btn ? ' active' : '')
 
-        setFilterAction(btn)
-    }
-    render() {
-        let {filter} = this.props
-        let btns = []
+      return (
+        <a key={i} filter={'filter-' + i} 
+          href="javascript:" 
+          onClick={() => this.onItemClick(btn)} 
+          className={cls}>
+          {btn}
+        </a>
+      )
+    })
 
-        for(let key in Status) {
-            btns.push(Status[key])
-        }
-
-        let doms = btns.map((btn, i) => {
-            let cls = 'key' + (filter === btn ? ' active' : '')
-
-            return <a key={i} filter={'filter-' + i} href="javascript:" onClick={this.onItemClick.bind(this, btn, i)} className={cls}>{btn}</a>
-        })
-
-        return <div className="querys">{doms}</div>
-    }
+    return <div className="querys">{doms}</div>
+  }
 }
 
 export default Filter

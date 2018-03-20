@@ -62,8 +62,8 @@ class ListItem extends Component {
     let { li, selectItem } = this.props
 
     selectItem({
-      updateId: li.id,
-      updateVal: txt
+      editId: li.id,
+      editVal: txt
     })
   }
 

@@ -15,24 +15,24 @@ class Header extends Component {
   
 
   componentWillReceiveProps(nextProps) {
-    const { current } = nextProps
-    const { updateId, updateVal } = current
+    const { editItem } = nextProps
+    const { editId, editVal } = editItem
 
-    if (updateId > 0 && updateVal) {
+    if (editId > 0 && editVal) {
       // this.setState({
-      //   val: updateVal,
+      //   val: editVal,
       // })
-      this.ipt.value = updateVal
+      this.ipt.value = editVal
       this.ipt.focus()
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { current } = nextProps
-    const { updateId, updateVal } = current
+    const { editItem } = nextProps
+    const { editId, editVal } = editItem
     
-    return updateId !== nextProps.current.updateId || updateVal !== nextProps.current.updateVal
-    // return updateId !== nextProps.current.updateId || updateVal !== nextProps.current.updateVal || this.state.val !== nextState.val
+    return editId !== nextProps.editItem.editId || editVal !== nextProps.editItem.editVal
+    // return editId !== nextProps.editItem.editId || editVal !== nextProps.editItem.editVal || this.state.val !== nextState.val
   }
 
   componentDidUpdate() {
@@ -54,13 +54,13 @@ class Header extends Component {
       return
     }
 
-    let { current, appendOrUpdateItem } = this.props
-    let { list, count, updateId } = current
-    let isUpdate = updateId > 0
+    let { editItem, appendOrUpdateItem } = this.props
+    let { list, count, editId } = editItem
+    let isUpdate = editId > 0
     let index = -1
 
     let item = isUpdate ? list.filter((li, i) => {
-      if(li.id === updateId) {
+      if(li.id === editId) {
         index = i
         return li
       }

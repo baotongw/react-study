@@ -39,15 +39,15 @@ class ListItem extends Component {
   }
 
   deleteItem = event => {
-    Actions.removeItem(this.props.li.id)
+    Actions.deleteItem(this.props.li.id)
   }
 
   changeItem(txt) {
     const { li } = this.props
 
     Actions.selectItem({
-      updateId: li.id,
-      updateVal: txt
+      editId: li.id,
+      editVal: txt
     })
   }
 
