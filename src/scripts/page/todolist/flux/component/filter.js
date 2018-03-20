@@ -1,37 +1,66 @@
 import React, { Component } from 'react'
 import Status from './status'
-import { setFilterAction } from '../actions/actions'
+import Actions from '../actions/actions'
+import Store from '../store/index'
 
 class Filter extends Component {
-    constructor() {
-        super()
+  constructor(props) {
+    super()
+
+    const { filter } = Store.getState()
+
+    this.state = { filter }
+
+    this.StatusArr = []
+
+    for(let key in Status) {
+      this.StatusArr.push(Status[key])
     }
-    
-    onItemClick(btn, index) {
-        let {filter, updateState} = this.props
+  }
 
-        if(btn === filter) {
-            return
-        }
+  onItemClick(btn) {
+    let { filter } = this.state
 
-        setFilterAction(btn)
+    if (btn === filter) {
+      return
     }
-    render() {
-        let {filter} = this.props
-        let btns = []
 
-        for(let key in Status) {
-            btns.push(Status[key])
-        }
+    Actions.setFilter(btn)
+  }
 
-        let doms = btns.map((btn, i) => {
-            let cls = 'key' + (filter === btn ? ' active' : '')
+  componentDidMount() {
+    Store.registeChangeHandler(this.onChange)
+  }
 
-            return <a key={i} filter={'filter-' + i} href="javascript:" onClick={this.onItemClick.bind(this, btn, i)} className={cls}>{btn}</a>
-        })
+  componentWillUnmount() {
+    Store.removeChangeHandler(this.onChange)
+  }
 
-        return <div className="querys">{doms}</div>
+  onChange = () => {
+    const { filter } = Store.getState()
+
+    if(this.state.filter !== filter) {
+      this.setState({ filter})
     }
+  }
+
+  render() {
+    let { filter } = this.state
+
+    let doms = this.StatusArr.map((status, i) => {
+      let cls = 'key' + (filter === status ? ' active' : '')
+
+      return (
+        <a key={i} filter={'filter-' + i} 
+          href="javascript:" 
+          className={cls}
+          onClick={() => this.onItemClick(status, i)}>{status}
+        </a>
+      )
+    })
+
+    return <div className="querys">{doms}</div>
+  }
 }
 
 export default Filter

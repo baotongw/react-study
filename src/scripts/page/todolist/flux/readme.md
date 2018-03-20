@@ -3,7 +3,7 @@
 1. View: 视图层
 2. Action: 动作，视图层发出的消息
 3. Dispatcher: 用来接收Actions、执行回调函数
-4. Store: 用来存放应用状态，一旦发生变动，就梯形Views要更新页面
+4. Store: 用来存放应用状态，一旦发生变动，就通知Views要更新页面
 
 [Flux流程图](http://www.ruanyifeng.com/blogimg/asset/2016/bg2016011503.png)
 

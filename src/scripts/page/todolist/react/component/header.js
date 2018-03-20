@@ -10,7 +10,7 @@ class Header extends Component {
     // }
 
     // this.onIptChange = this.onIptChange.bind(this)
-    this.appendList = this.appendList.bind(this)
+    this.editDone = this.editDone.bind(this)
   }
   
 
@@ -49,7 +49,7 @@ class Header extends Component {
     })
   }
 
-  appendList(event) {
+  editDone(event) {
     if (event.keyCode !== 13) {
       return
     }
@@ -94,7 +94,7 @@ class Header extends Component {
       <div className="header">
         <input type="text" className="ipt" 
           ref ={ipt => this.ipt = ipt}
-          onKeyUp={this.appendList} />
+          onKeyUp={this.editDone} />
       </div>
     )
 
@@ -105,7 +105,7 @@ class Header extends Component {
     //     value={val}
     //     ref ={ipt => this.ipt = ipt}
     //     onChange={this.onIptChange}
-    //     onKeyUp={this.appendList} />
+    //     onKeyUp={this.editDone} />
     // </div>
   }
 }
