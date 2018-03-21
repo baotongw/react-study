@@ -77,7 +77,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { 
     addItem: args => dispatch(addItem(args)), 
-    updateItem: args => dispatch(updateItem(args)),
+    updateItem: args => dispatch(updateItem(args),
   }
 }
 

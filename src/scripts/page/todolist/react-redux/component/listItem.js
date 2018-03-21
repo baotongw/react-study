@@ -41,26 +41,27 @@ class ListItem extends Component {
   onItemCheck(event) {
     const { li } = this.props
 
-    this.props.updateItem({
+    this.props.dispatch(updateItem({
       id: li.id,
       status: this.chk.checked ? Status.Complete : Status.Active
-    })
+    }))
   }
 
   onItemDelete(event) {
     const { li } = this.props
-    this.props.deleteItem({
+    
+    this.props.dispatch(deleteItem({
       id: li.id,
-    })
+    }))
   }
 
   onItemSelect(txt) {
     const { li } = this.props
     
-    this.props.selectItem({
+    this.props.dispatch(selectItem({
       editId: li.id,
       editVal: li.val,
-    })
+    }))
   }
 
   render() {
@@ -101,14 +102,14 @@ class ListItem extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return { 
-    selectItem: args => dispatch(selectItem(args)), 
-    deleteItem: args => dispatch(deleteItem(args)), 
-    updateItem: args => dispatch(updateItem(args)), 
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return { 
+//     selectItem: args => dispatch(selectItem(args)), 
+//     deleteItem: args => dispatch(deleteItem(args)), 
+//     updateItem: args => dispatch(updateItem(args)), 
+//   }
+// }
 
-const wrapper = connect(null, mapDispatchToProps)(ListItem)
+const wrapper = connect()(ListItem)
 
 export default wrapper

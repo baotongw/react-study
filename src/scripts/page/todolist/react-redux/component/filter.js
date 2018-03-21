@@ -23,7 +23,7 @@ class Filter extends Component {
   }
 
   onItemClick(newFilter) {
-    this.props.setFilter(newFilter)
+    this.props.dispatch(setFilter(newFilter))
   }
 
   render() {
@@ -57,12 +57,12 @@ function mapStateToProps(state) {
   return { filter }
 } 
 
-function mapDispatchToProps(dispatch) {
-  return { 
-    setFilter: args => dispatch(setFilter(args)),
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return { 
+//     setFilter: args => dispatch(setFilter(args)),
+//   }
+// }
 
-const wrapper = connect(mapStateToProps, mapDispatchToProps)(Filter)
+const wrapper = connect(mapStateToProps)(Filter)
 
 export default wrapper
