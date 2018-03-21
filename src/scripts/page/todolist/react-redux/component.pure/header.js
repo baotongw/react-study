@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Status from './status.js'
-import { dispatch } from '../reducer/index'
 import { addItem, editItem as updateItem } from '../action/index'
 
 class Header extends Component {
@@ -15,17 +15,14 @@ class Header extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('header-shouldComponentUpdate')
-    const { editItem } = nextProps
-    const { editId, editVal } = editItem
+    const { editId, editVal } = nextProps
     
-    return editId !== nextProps.editItem.editId || editVal !== nextProps.editItem.editVal
+    return editId !== this.props.editId || editVal !== this.props.editVal
   }
 
   componentDidUpdate() {
     console.log('header did update.')
-    // 刚进入页面不会有editItem，所以放到DidUpdate没问题
-    const { editItem } = nextProps
-    const { editId, editVal } = editItem
+    const { editId, editVal } = this.props
 
     if (editId > 0 && editVal) {
       this.ipt.value = editVal
@@ -42,17 +39,17 @@ class Header extends Component {
       return
     }
 
-    const { editId } = this.props.editItem
+    const { editId } = this.props
     const isUpdate = editId >  0
     const newVal = this.ipt.value
 
     if(isUpdate) {
-      dispatch(updateItem({
+      this.props.updateItem({
         id: editId, 
         val: newVal
-      }))
+      })
     } else {
-      dispatch(addItem(newVal))
+      this.props.addItem(newVal)
     }
 
     this.ipt.value = ''
@@ -71,4 +68,16 @@ class Header extends Component {
   }
 }
 
-export default Header
+function mapStateToProps(state) {
+  const { editId, editItem } = state.headerReducer
+
+  return { editId, editItem }
+} 
+
+function mapDispatchToProps(dispatch) {
+  return { addItem, updateItem }
+}
+
+const wrapper = connect(mapStateToProps, mapDispatchToProps)(Header)
+
+export default wrapper
