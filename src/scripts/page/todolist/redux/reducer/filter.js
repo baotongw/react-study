@@ -1,11 +1,11 @@
-import { SET_FILTER, Status } from '../const'
+import { SET_FILTER, Status } from '../constant'
 
 const defaultState = {
   filter: Status.All
 }
 
-function filterReducer(action ,state = defaultState) {
-  if(action.type === SET_FILTER && state.filter !== action.payloadß) {
+function filterReducer(state = defaultState, action) {
+  if(action.type === SET_FILTER && state.filter !== action.payload) {
     return { filter: action.payload }
   }
 

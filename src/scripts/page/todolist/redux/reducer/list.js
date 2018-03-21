@@ -1,4 +1,4 @@
-import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, Status } from '../const'
+import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, Status } from '../constant'
 
 // {
 //   id: 1
@@ -25,36 +25,41 @@ function findMatchItem(id, list) {
   return [matchIndex, matchItem]
 }
 
-function listReducer(action, state = defaultState) {
+function listReducer(state = defaultState, action) {
   switch (action.type) {
     case ADD_ITEM:
-      const count = state.count++;
       const item = {
-        id: count,
+        id: state.count++,
         val: action.payload,
         status: Status.Active,
       }
 
       return {
-        count,
+        count: state.count,
         list: state.list.concat([item]),
       }
+      
       break
     case EDIT_ITEM:
     case DELETE_ITEM:
       const { id } = action.payload
       const { list } = state
-
       const [matchIndex, matchItem] = findMatchItem(id, list)
       
-      list.splice(matchIndex, 1, {
+      const newItem = {
         ...matchItem,
         ...action.payload,
-      })
+      }
+      
+      if(action.type === DELETE_ITEM) {
+        newItem.status = Status.Delete
+      }
+
+      list.splice(matchIndex, 1, newItem)
       
       return {
         ...state,
-        list: oldList.slice(0),
+        list: list.slice(0),
       }
       break
   }

@@ -1,13 +1,13 @@
 import { createStore, combineReducers } from 'redux'
 
-import list from './list'
+import listReducer from './list'
 import header from './header'
-import filter from './filter'
+import filterReducer from './filter'
 
 const rootReducer = combineReducers({
-  list,
+  listReducer,
   header,
-  filter,
+  filterReducer,
 })
 
 const store = createStore(rootReducer)

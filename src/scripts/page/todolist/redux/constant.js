@@ -15,7 +15,7 @@ const Status = {
   Delete: 'Delete'
 }
 
-export default {
+export {
   ADD_ITEM,
   EDIT_ITEM,
   DELETE_ITEM,

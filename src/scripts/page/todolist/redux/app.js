@@ -31,7 +31,9 @@ class App extends Component {
   }
 
   render() {
-    const { header, list, filter } = this.state;
+    const { header, listReducer, filterReducer } = this.state
+    const { count, list } = listReducer
+    const { filter } = filterReducer
 
     return (
       <div>

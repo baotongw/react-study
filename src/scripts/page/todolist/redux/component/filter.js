@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Status } from '../const'
+import { Status } from '../constant'
 import { dispatch } from '../reducer/index'
 import { setFilter } from '../action/index'
 

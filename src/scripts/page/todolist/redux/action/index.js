@@ -1,4 +1,4 @@
-import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, SELECT_ITEM, SET_FILTER  } from '../const'
+import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, SELECT_ITEM, SET_FILTER  } from '../constant'
 
 function actionCreator(type, payload) {
   if(!type) {
@@ -20,15 +20,15 @@ function deleteItem(id) {
   return actionCreator(DELETE_ITEM, id)
 }
 
-function selectItem(id, isSelected) {
-  return actionCreator(id, isSelected)
+function selectItem(payload) {
+  return actionCreator(SELECT_ITEM, payload)
 }
 
 function setFilter(filter) {
-  return actionCreator(filter)
+  return actionCreator(SET_FILTER, filter)
 }
 
-export default {
+export {
   addItem, 
   editItem,
   deleteItem,

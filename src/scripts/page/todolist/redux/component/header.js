@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Status from './status.js'
 import { dispatch } from '../reducer/index'
 import { addItem, editItem as updateItem } from '../action/index'
+import { debug } from 'util';
 
 class Header extends Component {
   constructor(props) {
@@ -9,7 +10,12 @@ class Header extends Component {
     this.editDone = this.editDone.bind(this)
   }
 
+  componentWillReceiveProps(nextProps, nextState) {
+    console.log('header-componentWillReceiveProps')
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('header-shouldComponentUpdate')
     const { editItem } = nextProps
     const { editId, editVal } = editItem
     
