@@ -57,8 +57,10 @@ function mapStateToProps(state) {
   return { filter }
 } 
 
-function mapDispatchToProps() {
-  return { setFilter }
+function mapDispatchToProps(dispatch) {
+  return { 
+    setFilter: args => dispatch(setFilter(args)),
+  }
 }
 
 const wrapper = connect(mapStateToProps, mapDispatchToProps)(Filter)

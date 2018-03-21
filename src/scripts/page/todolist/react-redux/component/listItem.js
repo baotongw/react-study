@@ -59,7 +59,7 @@ class ListItem extends Component {
     
     this.props.selectItem({
       editId: li.id,
-      editVal: editVal,
+      editVal: li.val,
     })
   }
 
@@ -101,8 +101,12 @@ class ListItem extends Component {
   }
 }
 
-function mapDispatchToProps() {
-  return { selectItem, deleteItem, updateItem }
+function mapDispatchToProps(dispatch) {
+  return { 
+    selectItem: args => dispatch(selectItem(args)), 
+    deleteItem: args => dispatch(deleteItem(args)), 
+    updateItem: args => dispatch(updateItem(args)), 
+  }
 }
 
 const wrapper = connect(null, mapDispatchToProps)(ListItem)

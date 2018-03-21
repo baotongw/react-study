@@ -75,7 +75,10 @@ function mapStateToProps(state) {
 } 
 
 function mapDispatchToProps(dispatch) {
-  return { addItem, updateItem }
+  return { 
+    addItem: args => dispatch(addItem(args)), 
+    updateItem: args => dispatch(updateItem(args)),
+  }
 }
 
 const wrapper = connect(mapStateToProps, mapDispatchToProps)(Header)
