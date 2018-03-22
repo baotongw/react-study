@@ -24,7 +24,7 @@ class Header extends Component {
     console.log('header did update.')
     const { editId, editVal } = this.props
 
-    if (editId > 0 && editVal) {
+    if (editId > -1 && editVal) {
       this.ipt.value = editVal
       this.ipt.focus()
     }
@@ -69,15 +69,15 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  const { editId, editItem } = state.headerReducer
+  const { editId, editVal } = state.headerReducer
 
-  return { editId, editItem }
+  return { editId, editVal }
 } 
 
 function mapDispatchToProps(dispatch) {
   return { 
     addItem: args => dispatch(addItem(args)), 
-    updateItem: args => dispatch(updateItem(args),
+    updateItem: args => dispatch(updateItem(args)),
   }
 }
 
