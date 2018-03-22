@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react';
 import Status from './status.js'
-import { addItem, updateItem } from '../actions/index'
+import Actions from '../actions/index'
 import store from '../store/index'
 
 @observer
@@ -11,21 +11,27 @@ class Header extends Component {
     this.editDone = this.editDone.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { editId, editVal } = store
-
-    if (editId > 0 && editVal) {
-      this.ipt.value = editVal
-      this.ipt.focus()
-    }
-  }
-
   componentDidUpdate() {
     console.log('header did update.')
+
+    // 使用mobx可以避免判断shouldComponentUpdate
+    // 对于ref的使用，也有一些冲突
+    // 如果使用this.ipt.value去更新值，那么不会触发header的更新，因为这里数据是直接从store拿的
+    // 不是props传递下来的，所以mobx会认为组件没有发生变化，从而导致编辑的时候不更新
+    // const { editId, editVal } = store
+    
+    // if (editId > 0 && editVal) {
+    //   this.ipt.value = editVal
+    //   this.ipt.focus()
+    // }
   }
 
   componentDidMount() {
     console.log('header did Mount.')
+  }
+
+  onChange(e) {
+    store.editVal = e.target.value
   }
 
   editDone(event) {
@@ -33,29 +39,33 @@ class Header extends Component {
       return
     }
 
-    const { editId } = this.store
+    const { editId, editVal } = store
     const isUpdate = editId > 0
-    const newVal = this.ipt.value
+    // const newVal = this.ipt.value
 
     if (isUpdate) {
-      updateItem({
+      Actions.updateItem({
         id: editId,
-        val: newVal
+        val: editVal
       })
     } else {
-      addItem(newVal)
+      Actions.addItem(editVal)
     }
 
-    this.ipt.value = ''
+    // this.ipt.value = ''
   }
 
   render() {
     // 对于这种不需要及时抛出input动态值的case（动态的比如搜索框）
     // 不需要onChange去更新input值，在最终使用的时候通过原生拿即可
+    const { editId, editVal } = store
+    
     return (
       <div className="header">
         <input type="text" className="ipt"
-          ref={ipt => this.ipt = ipt}
+          value={editVal}
+          onChange={this.onChange}
+          // ref={ipt => this.ipt = ipt}
           onKeyUp={this.editDone} />
       </div>
     )

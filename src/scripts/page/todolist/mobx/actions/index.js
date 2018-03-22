@@ -1,5 +1,5 @@
 import { action } from 'mobx'
-import { Status } from '../component/status'
+import Status from '../component/status'
 import store from '../store/index'
 
 const Actions = {
@@ -9,8 +9,9 @@ const Actions = {
       val,
       status: Status.Active
     }
-    
+
     store.list.push(item)
+    store.editVal = ''
   }),
   updateItem: action(item => {
     const { id, val, status } = item
@@ -23,6 +24,8 @@ const Actions = {
         return false
       }
     })
+
+    store.editVal = ''
   }),
   deleteItem: action(item => {
     const { id } = item

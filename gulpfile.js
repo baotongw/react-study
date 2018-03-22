@@ -44,7 +44,10 @@ gulp.task('script', () => {
         });
         
         // es6 transform; react transform
-        return browser.transform('babelify', {presets: ['es2015', 'react', 'stage-0']})
+        return browser.transform('babelify', {
+            presets: ['es2015', 'react', 'stage-0'],
+            plugins: ['transform-decorators-legacy']
+        })
             .bundle()
             .pipe(source(entry))            
             .pipe(buffer())

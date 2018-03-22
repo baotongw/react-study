@@ -1,4 +1,5 @@
 import { observable } from 'mobx'
+import Status from '../component/status'
 
 const store = observable({
   editId: -1,

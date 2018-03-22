@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react';
-import { observer } from 'mobx-react';
 import Status from './status'
-import { selectItem, deleteItem, updateItem } from '../actions/index'
+import Actions from '../actions/index'
 
 @observer
 class ListItem extends Component {
@@ -43,7 +42,7 @@ class ListItem extends Component {
   onItemCheck(event) {
     const { li } = this.props
 
-    updateItem({
+    Actions.updateItem({
       ...li,
       status: this.chk.checked ? Status.Complete : Status.Active
     })
@@ -52,7 +51,7 @@ class ListItem extends Component {
   onItemDelete(event) {
     const { li } = this.props
 
-    deleteItem({
+    Actions.deleteItem({
       id: li.id,
     })
   }
@@ -60,9 +59,9 @@ class ListItem extends Component {
   onItemSelect(txt) {
     const { li } = this.props
     
-    selectItem({
+    Actions.selectItem({
       editId: li.id,
-      editVal: editVal,
+      editVal: li.val,
     })
   }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react';
 import Status from './status'
-import { setFilter } from '../actions/index'
+import Actions from '../actions/index'
 import store from '../store/index'
 
 @observer
@@ -26,7 +26,7 @@ class Filter extends Component {
   }
 
   onItemClick(newFilter) {
-    setFilter(newFilter)
+    Actions.setFilter(newFilter)
   }
 
   render() {
