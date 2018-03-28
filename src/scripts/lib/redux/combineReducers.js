@@ -105,6 +105,10 @@ function assertReducerShape(reducers) {
  * reducer function. It will call every child reducer, and gather their results
  * into a single state object, whose keys correspond to the keys of the passed
  * reducer functions.
+ * 
+ * 接收一个对象，它的所有key都是function，每个function都是一个reducer；
+ * 返回一个function，每个action触发的时候就会循环调用子reducer，将最终结果合并到新的对象中
+ * 也就是new state
  *
  * @param {Object} reducers An object whose values correspond to different
  * reducer functions that need to be combined into one. One handy way to obtain
