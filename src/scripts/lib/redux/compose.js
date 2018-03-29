@@ -10,6 +10,7 @@
  */
 
 export default function compose(...funcs) {
+  // 没有函数传入，返回参数
   if (funcs.length === 0) {
     return arg => arg
   }
@@ -19,4 +20,28 @@ export default function compose(...funcs) {
   }
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
+
+  // let firstCompose = function(...args) {
+  //   // 将右边函数的计算结果返回给左边函数，知道所有的middleware执行完
+  //   let ret = rightFunc(args);
+  //   return leftFunc(ret);
+  // }
+
+  // let secondCompose = function(...args) {
+  //   let ret = rightFunc(args);
+
+  //   return firstCompose(ret);
+  // }
+
+  // let thirdCompose = function(...args) {
+  //   let ret = rightFunc(args);
+
+  //   return secondCompose(ret);
+  // }
+
+  // ...move on
+
+  // let composeFinalFunc = thirdCompose;
+
+  // composeFinalFunc(store.dispatch);
 }
