@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from '../../../../lib/react-redux/index'
 import Status from './status.js'
 import { addItem, editItem as updateItem } from '../action/index'
 

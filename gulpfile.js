@@ -29,8 +29,8 @@ var js_entries = [
     // 'page/todolist/react/app.js',
     // 'page/todolist/flux/app.js',
     // 'page/todolist/redux/app.js', 
-    // 'page/todolist/react-redux/index.js',
-    'page/todolist/mobx/app.js',
+    'page/todolist/react-redux/index.js',
+    // 'page/todolist/mobx/app.js',
     // 'page/react-study/app.js',
 ]
 
@@ -41,15 +41,16 @@ gulp.task('script', () => {
         var browser = browserify({
             basedir: 'src/scripts',
             entries: [entry]
-        });
-        
+        }, { debug: true });
+
         // es6 transform; react transform
         return browser.transform('babelify', {
             presets: ['es2015', 'react', 'stage-0'],
-            plugins: ['transform-decorators-legacy']
+            plugins: ['transform-decorators-legacy'],
+            sourceMaps: true,
         })
             .bundle()
-            .pipe(source(entry))            
+            .pipe(source(entry))
             .pipe(buffer())
             .pipe(sourcemaps.init({ loadMaps: true }))
             // .pipe(uglify())

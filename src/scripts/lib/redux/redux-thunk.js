@@ -1,5 +1,8 @@
 function createThunkMiddleware(extraArgument) {
   return ({ dispatch, getState }) => next => action => {
+    // 这里是增强之后的dispatch
+    // action是实际环境传入的action， next是下一个需要执行的middle
+    // 如果传入的是function，中断middleware链
     if (typeof action === 'function') {
       return action(dispatch, getState, extraArgument);
     }
