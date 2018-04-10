@@ -20,6 +20,7 @@ function promiseMiddleware(_ref) {
 
   // second函数会在compose之后在applyMiddleware文件中被执行
   // 传入的参数是dispatch或上一个中间件的返回值
+  // dispatch
   return function second(next) {
     return function third(action) {
       // 如果不是标准的action

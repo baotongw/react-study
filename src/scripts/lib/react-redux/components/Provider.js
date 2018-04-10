@@ -28,7 +28,6 @@ export function createProvider(storeKey = 'store', subKey) {
     }
 
     constructor(props, context) {
-      debugger
       super(props, context)
       // 这里存储了全局store
       // this.store = props.store;

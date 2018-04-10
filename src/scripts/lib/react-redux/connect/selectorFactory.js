@@ -103,7 +103,6 @@ export default function finalPropsSelectorFactory(dispatch, {
   initMergeProps,
   ...options
 }) {
-  debugger
   const mapStateToProps = initMapStateToProps(dispatch, options)
   const mapDispatchToProps = initMapDispatchToProps(dispatch, options)
   const mergeProps = initMergeProps(dispatch, options)

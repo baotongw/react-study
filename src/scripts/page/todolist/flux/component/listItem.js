@@ -70,11 +70,20 @@ class ListItem extends Component {
     return (
       <li className={cls}>
         <span className="chk">
-          <input type="checkbox" ref={(target) => this.chk = target} name="status" checked={attr} onChange={this.onItemCheck} />
+          <input type="checkbox" ref={(target) => this.chk = target}
+            name="status" checked={attr}
+            onChange={this.onItemCheck} 
+          />
         </span>
-        <span className="val" onClick={() => this.changeItem(li.val)}>{li.val}</span>
+        <span className="val" 
+          onClick={() => this.changeItem(li.val)}>
+          {li.val}
+        </span>
         <span className="oper">
-          <a href="javascript:" className="del" onClick={this.deleteItem} >Delete</a>
+          <a href="javascript:" className="del" 
+            onClick={this.deleteItem}>
+            Delete
+          </a>
         </span>
       </li>
     )

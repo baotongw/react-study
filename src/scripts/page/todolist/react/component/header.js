@@ -43,6 +43,7 @@ class Header extends Component {
     console.log('header did Mount.')
   }
 
+  // obsolete
   onIptChange(e) {
     this.setState({
       val: e.target.value
@@ -70,7 +71,7 @@ class Header extends Component {
       id: ++count
     }
 
-    const editItem = {
+    const newItem = {
       id: item.id,
       // reset status
       status: Status.Active,
@@ -81,7 +82,7 @@ class Header extends Component {
     appendOrUpdateItem({
       index,
       isUpdate,
-      editItem,
+      editItem: newItem,
     })
 
     this.ipt.value = ''

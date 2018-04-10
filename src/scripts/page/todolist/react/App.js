@@ -68,4 +68,15 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('container'))
+// ReactDOM.render(<App />, document.getElementById('container'))
+
+
+const appInstance = React.createElement(App);
+ReactDOM.render(appInstance, document.getElementById('container'))
+
+// export default appInstance;
+
+// appInstance.setState()
+// appInstance.forceUpdate()
+
+// listInstance.update()

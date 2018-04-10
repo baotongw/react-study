@@ -19,6 +19,16 @@ class Store extends EventEmitter {
 
   registeChangeHandler(cb) {
     this.on('change', cb)
+
+    // const wrapperCallback = () => {
+    //   cb(this.state);
+    // }
+
+    // this.on('change', wrapperCallback);
+
+    // return function unsubscribe() {
+    //   this.removeChangeHandler('change', wrapperCallback);
+    // }
   }
 
   removeChangeHandler(cb) {

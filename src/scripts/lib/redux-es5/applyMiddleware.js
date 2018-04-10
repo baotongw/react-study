@@ -36,6 +36,7 @@ function applyMiddleware() {
   return function (createStore) {
     return function (reducer, preloadedState, enhancer) {
       var store = createStore(reducer, preloadedState, enhancer);
+      // 原始dispatch
       var _dispatch = store.dispatch;
       var chain = [];
 
@@ -45,10 +46,13 @@ function applyMiddleware() {
           return _dispatch(action);
         }
       };
-      debugger
+
+      // 中间件通过作用域封装getState和dispatch
+      // chain还是中间价数组
       chain = middlewares.map(function (middleware) {
         return middleware(middlewareAPI);
       });
+
       _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
 
       return _extends({}, store, {

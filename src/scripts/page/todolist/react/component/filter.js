@@ -47,7 +47,13 @@ class Filter extends Component {
     let doms = btns.map((btn, i) => {
       let cls = 'key' + (filter === btn ? ' active' : '')
 
-      return <a key={i} filter={'filter-' + i} href="javascript:" onClick={() => this.onItemClick(btn)} className={cls}>{btn}</a>
+      return <a key={i}
+        filter={'filter-' + i}
+        href="javascript:"
+        onClick={() => this.onItemClick(btn)}
+        className={cls}>
+        {btn}
+      </a>
     })
 
     return <div className="querys">{doms}</div>

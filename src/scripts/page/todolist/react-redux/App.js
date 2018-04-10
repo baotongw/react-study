@@ -6,7 +6,6 @@ import Status from './component/status'
 import store from './reducer/index'
 
 class App extends Component {
-
   componentDidMount() {
     console.log('App did Mount.')
   }

@@ -18,7 +18,9 @@ export default function compose(...funcs) {
   if (funcs.length === 1) {
     return funcs[0]
   }
-
+  // [a,b,c,d]
+  // const finalFunc = a( b (c ( d(args) ) ) )
+  // finalFunc(dispatch)
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 
   // let firstCompose = function(...args) {

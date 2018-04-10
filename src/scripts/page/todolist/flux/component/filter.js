@@ -40,7 +40,7 @@ class Filter extends Component {
     const { filter } = Store.getState()
 
     if(this.state.filter !== filter) {
-      this.setState({ filter})
+      this.setState({ filter })
     }
   }
 

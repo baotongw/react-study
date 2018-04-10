@@ -19,7 +19,6 @@ function createListenerCollection() {
     },
     // 通知
     notify() {
-      debugger
       // 执行回调的时候设置current = next
       const listeners = current = next
       for (let i = 0; i < listeners.length; i++) {
@@ -76,7 +75,6 @@ export default class Subscription {
   }
 
   trySubscribe() {
-    debugger
     // store的subscribe会在dispatch之后调用回调
     if (!this.unsubscribe) {
       this.unsubscribe = this.parentSub

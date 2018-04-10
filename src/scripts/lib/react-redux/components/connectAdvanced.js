@@ -77,7 +77,6 @@ export default function connectAdvanced(
     ...connectOptions
   } = {}
 ) {
-  debugger
   const subscriptionKey = storeKey + 'Subscription'
   const version = hotReloadingVersion++
 
@@ -92,7 +91,6 @@ export default function connectAdvanced(
   // 使用connect封装一下；WrappedComponent：被封装的组件
   // 必须是一个组件，类的实例
   return function wrapWithConnect(WrappedComponent) {
-    debugger
     invariant(
       typeof WrappedComponent == 'function',
       `You must pass a component to the function returned by ` +

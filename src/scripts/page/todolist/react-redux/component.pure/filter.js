@@ -60,7 +60,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps() {
   return { setFilter }
 }
-debugger
+
 const wrapper = connect(mapStateToProps, mapDispatchToProps)(Filter)
 
 export default wrapper

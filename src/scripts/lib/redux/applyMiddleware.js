@@ -34,6 +34,7 @@ export default function applyMiddleware(...middlewares) {
       dispatch: (action) => dispatch(action)
     }
 
+    // 中间价通过新增function作用域封装保存对getState和dispatch的引用
     // chain是结合了middlewareAPI之后的包装function数组合集
     chain = middlewares.map(middleware => middleware(middlewareAPI))
     // 增强版的dispatch

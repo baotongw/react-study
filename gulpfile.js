@@ -26,11 +26,11 @@ var gulp = require('gulp'),
 
 var js_entries = [
     // 'page/todolist/backbone/app.js',
-    // 'page/todolist/react/app.js',
-    // 'page/todolist/flux/app.js',
-    // 'page/todolist/redux/app.js', 
+    'page/todolist/react/app.js',
+    'page/todolist/flux/app.js',
+    'page/todolist/redux/app.js', 
     'page/todolist/react-redux/index.js',
-    // 'page/todolist/mobx/app.js',
+    'page/todolist/mobx/app.js',
     // 'page/react-study/app.js',
 ]
 
