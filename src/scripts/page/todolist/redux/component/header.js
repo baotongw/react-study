@@ -65,7 +65,9 @@ class Header extends Component {
       <div className="header">
         <input type="text" className="ipt" 
           ref ={ipt => this.ipt = ipt}
-          onKeyUp={this.editDone} />
+          onKeyUp={this.editDone}
+          placeholder="what your focus today"
+        />
       </div>
     )
   }

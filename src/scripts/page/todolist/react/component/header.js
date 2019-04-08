@@ -40,7 +40,31 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    console.log('header did Mount.')
+    console.log('baotongw header did Mount.')
+    let index = 0;
+    let arr = new Array(100);
+    arr.fill(1);
+
+    // let intervalId = setInterval(() => {
+      for(let i=0;i<arr.length;i++) {
+        index += 1;
+        this.props.appendOrUpdateItem({
+          index,
+          isUpdate: false,
+          editItem: {
+            id: index,
+            status: Status.Active,
+            val: index,
+          }
+        });
+      }
+      
+      
+
+      // if(index === 100) {
+      //   clearInterval(intervalId);
+      // }
+    // }, 0);
   }
 
   // obsolete

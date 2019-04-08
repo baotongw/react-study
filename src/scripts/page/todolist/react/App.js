@@ -5,6 +5,8 @@ import List from './component/list'
 import Filter from './component/filter'
 import Status from './component/status'
 
+let renderSum = 0;
+
 class App extends Component {
 
   constructor(props) {
@@ -43,6 +45,8 @@ class App extends Component {
       editId: -1,
       editVal: '',
     })
+
+    console.log('baotongw', this.state.list.length);
   }
 
   componentDidMount() {
@@ -54,25 +58,28 @@ class App extends Component {
   }
 
   render() {
-    return <div>
-      <header className="p-hd">TODO List - React</header>
-      <section className="content">
-        <div className="box">
-          <Header editItem={this.state} appendOrUpdateItem={this.appendOrUpdateItem} />
-          <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
-          <Filter filter={this.state.filter} updateState={this.updateState} />
-        </div>
-      </section>
-      <footer className="p-ft">Copyright Baotong.Wang 2018.</footer>
-    </div>
+    console.log('baotongw app render', renderSum++);
+    return (
+      <div>
+        <header className="p-hd">TODO List - React</header>
+        <section className="content">
+          <div className="box">
+            <Header list={this.state.list} editItem={this.state} appendOrUpdateItem={this.appendOrUpdateItem} />
+            <List list={this.state.list} filter={this.state.filter} updateState={this.updateState} />
+            <Filter filter={this.state.filter} updateState={this.updateState} />
+          </div>
+        </section>
+        <footer className="p-ft">Copyright Baotong.Wang 2018.</footer>
+      </div>
+    )
   }
 }
 
-// ReactDOM.render(<App />, document.getElementById('container'))
+ReactDOM.render(<App />, document.getElementById('container'))
 
 
-const appInstance = React.createElement(App);
-ReactDOM.render(appInstance, document.getElementById('container'))
+// const appInstance = React.createElement(App);
+// ReactDOM.render(appInstance, document.getElementById('container'))
 
 // export default appInstance;
 

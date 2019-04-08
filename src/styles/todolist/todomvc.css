@@ -21,7 +21,7 @@ a {
 .p-hd {
     padding: 20px;
     font-size: 42px;
-    color: #e79;
+    color: #f60;
 }
 .content {
     padding: 4px 10px;
@@ -35,7 +35,7 @@ a {
 }
 .ipt {
     height: 28px;
-    width: 500px;
+    width: 400px;
     line-height: 28px;
     padding: 12px;
     font-size: 24px;
@@ -44,8 +44,20 @@ a {
     border: none;
     outline: none;
 }
+.ipt::-webkit-input-placeholder{
+    color: #ddd;
+}
+.ipt::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color: #ddd;
+}
+.ipt:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color: #ddd;
+}
+.ipt:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color: #ddd;
+}
 .i-list {
-    width: 524px;
+    width: 400px;
     margin: 0 auto;
     text-align: left;
 }
@@ -94,8 +106,9 @@ a {
 }
 
 .querys .active {
-    border: 1px solid #e79;
     border-radius: 2px;
+    background-color: #f60;
+    color: #fff;
 }
 
 .p-ft {
@@ -105,4 +118,12 @@ a {
     margin-left: -200px;
     bottom: 20px;
     text-align: center;
+}
+.right-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    border: 1px solid lawngreen;
 }

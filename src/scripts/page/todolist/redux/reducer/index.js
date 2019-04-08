@@ -1,8 +1,10 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import listReducer from './list'
 import header from './header'
 import filterReducer from './filter'
+
+import reduxLoggerMiddleware from '../middleware/logger';
 
 const rootReducer = combineReducers({
   listReducer,
@@ -10,7 +12,9 @@ const rootReducer = combineReducers({
   filterReducer,
 })
 
-const store = createStore(rootReducer)
+const middlewares = applyMiddleware(reduxLoggerMiddleware)
+
+const store = createStore(rootReducer, middlewares)
 
 const { dispatch, subscribe, getState } = store
 

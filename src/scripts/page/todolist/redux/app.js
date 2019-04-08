@@ -5,6 +5,7 @@ import List from './component/list'
 import Filter from './component/filter'
 import Status from './component/status'
 import store from './reducer/index'
+import DevTool from './devTools'
 
 class App extends Component {
 
@@ -37,7 +38,7 @@ class App extends Component {
 
     return (
       <div>
-        <header className="p-hd">TODO List - React</header>
+        <header className="p-hd">TODO List - Redux</header>
         <section className="content">
           <div className="box">
             <Header editItem={header} />
@@ -46,6 +47,9 @@ class App extends Component {
           </div>
         </section>
         <footer className="p-ft">Copyright Baotong.Wang 2018.</footer>
+        <div className="right-bar">
+          <DevTool />
+        </div>
       </div>
     )
   }

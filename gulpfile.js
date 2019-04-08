@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
     // js min
-    uglify = require('gulp-uglify'),
+    // uglify = require('gulp-uglify'),
     // 文件合并
     // concat = require('gulp-concat'),
     // 处理css import
@@ -26,11 +26,12 @@ var gulp = require('gulp'),
 
 var js_entries = [
     // 'page/todolist/backbone/app.js',
-    'page/todolist/react/app.js',
-    'page/todolist/flux/app.js',
-    'page/todolist/redux/app.js', 
-    'page/todolist/react-redux/index.js',
-    'page/todolist/mobx/app.js',
+    'page/todolist/react/App.js',
+    // 'page/todolist/react/index.js',
+    // 'page/todolist/flux/app.js',
+    // 'page/todolist/redux/app.js', 
+    // 'page/todolist/react-redux/index.js',
+    // 'page/todolist/mobx/app.js',
     // 'page/react-study/app.js',
 ]
 

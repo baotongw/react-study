@@ -66,7 +66,9 @@ class Header extends Component {
           value={editVal}
           onChange={this.onChange}
           // ref={ipt => this.ipt = ipt}
-          onKeyUp={this.editDone} />
+          onKeyUp={this.editDone}
+          placeholder="what your focus today"
+        />
       </div>
     )
   }

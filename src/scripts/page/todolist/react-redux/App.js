@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="p-hd">TODO List - react + react-redux</header>
+        <header className="p-hd">TODO List - react-redux</header>
         <section className="content">
           <div className="box">
             <Header />
